@@ -1,16 +1,14 @@
 // app/layout.tsx
-'use client'; // Add this
+'use client';
 import './globals.css'
-import type { Metadata } from 'next' // Keep if still used, or remove if metadata is static
+import type { Metadata } from 'next' // Kept as per previous step
 import { Inter } from 'next/font/google'
-import React, { useState, useEffect } from 'react'; // Import useState and useEffect
-import Terminal from './components/Terminal'; // Import Terminal
+import React, { useState, useEffect } from 'react';
+import Terminal from './components/Terminal';
 
 const inter = Inter({ subsets: ['latin'] })
 
-// Metadata might need to be handled differently if layout becomes a full client component.
-// For now, we assume it's acceptable or will be adjusted.
-export const metadata: Metadata = {
+export const metadata: Metadata = { // Kept as per previous step
   title: 'Muhammed Osama Muhammed | Mechanical Engineer',
   description: 'Portfolio of Muhammed Osama Muhammed, a Mechanical Engineering student with expertise in CAD, automation, and web technologies.',
 }
@@ -22,14 +20,17 @@ export default function RootLayout({
 }) {
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
 
-  const toggleTerminal = () => {
-    setIsTerminalOpen(prev => !prev);
-  };
+  // Toggling function is simplified as direct state update is clear
+  // const toggleTerminal = () => {
+  //   setIsTerminalOpen(prev => !prev);
+  // };
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === '`') {
-        toggleTerminal();
+        setIsTerminalOpen(prev => !prev); // Toggle behavior
+      } else if (event.key === 'Escape' && isTerminalOpen) {
+        setIsTerminalOpen(false); // Close on Escape if open
       }
     };
 
@@ -37,13 +38,13 @@ export default function RootLayout({
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, []); // Empty dependency array means this effect runs once on mount and cleans up on unmount
+  }, [isTerminalOpen]); // Add isTerminalOpen to dependency array because the Escape key logic depends on it
 
   return (
     <html lang="en" className="!scroll-smooth">
       <body className={`${inter.className} bg-background leading-relaxed antialiased selection:bg-slate-300/30`}>
         {children}
-        {isTerminalOpen && <Terminal onClose={toggleTerminal} />}
+        {isTerminalOpen && <Terminal onClose={() => setIsTerminalOpen(false)} />} {/* Ensure onClose directly sets to false */}
       </body>
     </html>
   )
