@@ -1,0 +1,473 @@
+/* CSS Reset */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px; /* Base font size */
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--dark-navy);
+    color: var(--light-slate);
+    line-height: 1.6;
+}
+
+:root {
+    --dark-navy: #0D1B2A;
+    --dark-blue: #1B263B;
+    --mid-blue: #415A77;
+    --light-slate: #E0E1DD;
+    --accent-blue: #3A86FF;
+
+    --font-heading: 'Roboto Mono', monospace;
+    --font-body: 'Inter', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--light-slate);
+    margin-bottom: 1rem;
+}
+
+p {
+    font-family: var(--font-body);
+    margin-bottom: 1rem;
+}
+
+a {
+    color: var(--accent-blue);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Utility classes */
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+section {
+    padding: 4rem 0;
+}
+
+/* Preloader Styles */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--dark-navy);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease-out, visibility 0.5s ease-out; /* For fade-out effect */
+}
+
+#preloader.fade-out { /* Class to be added by JS */
+    opacity: 0;
+    visibility: hidden;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid var(--mid-blue);
+    border-top-color: var(--accent-blue);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Header Styles */
+#main-header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(13, 27, 42, 0.8); /* Semi-transparent --dark-navy */
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    padding: 1rem 0;
+    transition: background-color 0.3s ease; /* For scroll effect later */
+}
+
+#main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0; /* Override section padding */
+    padding-bottom: 0; /* Override section padding */
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--light-slate);
+}
+
+#main-header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+
+#main-header nav ul li a {
+    font-family: var(--font-body);
+    color: var(--light-slate);
+    padding: 0.5rem 0;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+#main-header nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: var(--accent-blue);
+    transition: width 0.3s ease-in-out;
+}
+
+#main-header nav ul li a:hover {
+    color: var(--accent-blue);
+    text-decoration: none;
+}
+
+#main-header nav ul li a:hover::after {
+    width: 100%;
+}
+
+/* Class for scrolled header state (to be added by JS) */
+#main-header.scrolled {
+    background-color: var(--dark-navy); /* Solid background */
+}
+
+/* Hero Section Styles */
+#hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden; /* Ensures video/overlay don't cause scrollbars */
+    color: var(--light-slate);
+}
+
+#hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translateX(-50%) translateY(-50%);
+    z-index: -2;
+    background-color: var(--dark-navy); /* Fallback if video fails */
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(13, 27, 42, 0.6); /* Semi-transparent overlay */
+    z-index: -1;
+}
+
+.hero-content {
+    position: relative; /* To sit above overlay contextually */
+    z-index: 1;
+}
+
+#hero h1 {
+    font-size: 3rem; /* Responsive font size can be added later */
+    margin-bottom: 1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+#hero p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    font-family: var(--font-body); /* Ensure body font for this p */
+}
+
+/* Call to Action Button Styles */
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    margin: 0 0.5rem;
+    border: 2px solid transparent;
+}
+
+.btn-primary {
+    background-color: var(--accent-blue);
+    color: var(--dark-navy);
+}
+
+.btn-primary:hover {
+    background-color: transparent;
+    color: var(--accent-blue);
+    border-color: var(--accent-blue);
+    transform: translateY(-3px);
+    text-decoration:none;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--light-slate);
+    border-color: var(--mid-blue);
+}
+
+.btn-secondary:hover {
+    background-color: var(--mid-blue);
+    color: var(--dark-navy);
+    border-color: var(--mid-blue);
+    transform: translateY(-3px);
+    text-decoration:none;
+}
+
+/* Animation for hero elements - initial state set by .hidden */
+#hero h1.hidden,
+#hero p.hidden,
+#hero .cta-buttons.hidden {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+#hero h1.visible,
+#hero p.visible,
+#hero .cta-buttons.visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition-property: opacity, transform;
+    transition-duration: 0.8s;
+    transition-timing-function: ease-out;
+}
+
+/* About Section Styles */
+#about {
+    /* .container class already provides padding and max-width */
+    /* .animate-on-scroll and .hidden are already defined for entry animation */
+}
+
+.about-content {
+    display: flex;
+    align-items: flex-start; /* Align items to the top */
+    gap: 3rem;
+}
+
+.about-avatar {
+    flex-basis: 30%; /* Avatar column takes up 30% of the width */
+    max-width: 300px; /* Max width for the avatar image/container */
+}
+
+.avatar-placeholder { /* Styling for the text placeholder */
+    width: 100%;
+    padding-top: 100%; /* Creates a square aspect ratio */
+    position: relative;
+    background-color: var(--mid-blue);
+    border-radius: 50%; /* Make it circular */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--dark-navy);
+    overflow: hidden; /* In case an actual image is larger */
+    border: 5px solid var(--accent-blue); /* Glowing border effect */
+    box-shadow: 0 0 15px var(--accent-blue);
+}
+
+.about-avatar img { /* Styling if an actual image is used */
+    border-radius: 50%; /* Make image circular */
+    border: 5px solid var(--accent-blue);
+    box-shadow: 0 0 15px var(--accent-blue);
+}
+
+.about-text {
+    flex-basis: 70%; /* Text column takes up 70% of the width */
+}
+
+.about-text h2 {
+    font-size: 2rem;
+    color: var(--accent-blue);
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.about-text h2::after { /* Underline for the heading */
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background-color: var(--accent-blue);
+}
+
+.about-text p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--light-slate);
+    margin-bottom: 1rem;
+}
+
+/* Responsive adjustments for About section */
+@media (max-width: 768px) {
+    .about-content {
+        flex-direction: column;
+        align-items: center; /* Center items when stacked */
+        text-align: center;
+    }
+
+    .about-avatar {
+        margin-bottom: 2rem;
+        max-width: 250px; /* Slightly smaller avatar on mobile */
+    }
+
+    .about-text h2::after {
+        left: 50%;
+        transform: translateX(-50%); /* Center the underline */
+    }
+}
+
+/* Skills Section Styles */
+#skills {
+    background-color: var(--dark-blue); /* Slightly different background for section separation */
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+}
+
+#skills h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--light-slate);
+    margin-bottom: 3rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+#skills h2::after { /* Underline for the heading */
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 3px;
+    background-color: var(--accent-blue);
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    perspective: 1000px; /* For 3D hover effects on cards */
+}
+
+.skill-card {
+    background-color: var(--dark-navy);
+    padding: 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid var(--mid-blue);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform-style: preserve-3d; /* For 3D hover effects */
+}
+
+.skill-card:hover {
+    transform: scale(1.05) translateZ(20px); /* Slight scale and lift */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 0 15px var(--accent-blue);
+}
+
+.skill-icon-placeholder {
+    width: 60px;
+    height: 60px;
+    background-color: var(--mid-blue);
+    border-radius: 50%;
+    margin: 0 auto 1rem auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem; /* Could be used for an initial or a simple icon font */
+    color: var(--accent-blue);
+    /* For actual icons, you'd use an <img>, <i>, or SVG here */
+}
+
+.skill-card h3 {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    color: var(--light-slate);
+    margin-bottom: 0; /* Remove default heading margin */
+}
+
+/* Responsive adjustments for Skills section */
+@media (max-width: 768px) {
+    .skills-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+    }
+
+    .skill-card {
+        padding: 1rem;
+    }
+
+    .skill-icon-placeholder {
+        width: 50px;
+        height: 50px;
+    }
+}
