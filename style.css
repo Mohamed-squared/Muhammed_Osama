@@ -335,6 +335,9 @@ section {
     border-radius: 50%; /* Make image circular */
     border: 5px solid var(--accent-blue);
     box-shadow: 0 0 15px var(--accent-blue);
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
 }
 
 .about-text {
