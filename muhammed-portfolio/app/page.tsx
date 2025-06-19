@@ -1,11 +1,13 @@
 import Hero from './components/Hero';
-import Skills from './components/Skills'; // Import the Skills component
+import Skills from './components/Skills';
+import Projects from './components/Projects'; // Import the Projects component
 
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between">
       <Hero />
-      <Skills /> {/* Add the Skills component here */}
+      <Skills />
+      <Projects /> {/* Add the Projects component here */}
     </main>
   );
 }
