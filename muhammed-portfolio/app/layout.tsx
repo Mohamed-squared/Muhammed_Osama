@@ -2,7 +2,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import Header from './components/Header' // Import the Header component
+// Removed: import Header from './components/Header'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="!scroll-smooth">
       <body className={`${inter.className} bg-background leading-relaxed antialiased selection:bg-slate-300/30`}>
-        <Header /> {/* Add the Header component here */}
+        {/* Removed: <Header /> */}
         {children}
       </body>
     </html>
