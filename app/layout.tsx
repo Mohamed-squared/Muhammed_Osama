@@ -1,5 +1,4 @@
 // app/layout.tsx
-'use client';
 import './globals.css'
 import type { Metadata } from 'next' // Kept as per previous step
 import { Inter } from 'next/font/google'
