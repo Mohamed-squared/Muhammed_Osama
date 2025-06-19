@@ -1,9 +1,11 @@
 // app/components/Skills.tsx
 import React from 'react';
-import { FaCogs, FaCode, FaDraftingGno, FaFlask, FaComments, FaFileAlt } from 'react-icons/fa';
+// Correct the icon import
+import { FaCogs, FaCode, FaPencilRuler, FaFlask, FaComments, FaFileAlt } from 'react-icons/fa';
 
 const skills = [
-  { name: "SolidWorks (Certified)", icon: <FaDraftingGno /> },
+  // Use the new, valid icon
+  { name: "SolidWorks (Certified)", icon: <FaPencilRuler /> },
   { name: "Basic MATLAB", icon: <FaFlask /> },
   { name: "HTML, CSS & JavaScript", icon: <FaCode /> },
   { name: "Technical Problem Solving", icon: <FaCogs /> },

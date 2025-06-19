@@ -1,7 +1,8 @@
 // app/components/FadeIn.tsx
 'use client';
 import React from 'react';
-import { motion } from 'framer-motion';
+// Import Variants from framer-motion
+import { motion, Variants } from 'framer-motion';
 
 interface FadeInProps {
   children: React.ReactNode;
@@ -11,7 +12,8 @@ interface FadeInProps {
 }
 
 const FadeIn: React.FC<FadeInProps> = ({ children, delay = 0.2, direction = 'up', className }) => {
-  const variants = {
+  // Explicitly add the type 'Variants' here
+  const variants: Variants = {
     hidden: {
       opacity: 0,
       y: direction === 'up' ? 20 : direction === 'down' ? -20 : 0,
